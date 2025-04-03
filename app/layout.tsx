@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/site-header";
 // import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 import { DataTable } from "@/components/data-table";
 import data from "./dashboard/data.json"
+import HeaderTabs from "@/components/tabs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,10 +33,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+
         <SidebarProvider>
           <AppSidebar variant="inset" />
           <SidebarInset>
             <SiteHeader />
+            <HeaderTabs />
             <div className="flex flex-1 flex-col">
               <div className="@container/main flex flex-1 flex-col gap-2">
                 <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
