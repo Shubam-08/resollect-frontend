@@ -105,7 +105,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { Search } from "lucide-react"
+import { Search, X} from "lucide-react"
+import UploadSidebar from "./upload-sidebar"
 
 export const schema = z.object({
   id: z.number(),
@@ -261,7 +262,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
       if (isAssigned) {
         return row.original.reviewer
       }
-
+     
       return (
         <>
           <Label htmlFor={`${row.original.id}-reviewer`} className="sr-only">
@@ -344,6 +345,7 @@ export function DataTable({
 }) {
   const [data, setData] = React.useState(() => initialData)
   const [rowSelection, setRowSelection] = React.useState({})
+  const [isOpen, setIsOpen] = React.useState(false);
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -483,10 +485,38 @@ export function DataTable({
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button variant="outline" size="sm">
-            <IconPlus />
-            <span className="hidden lg:inline">More Filters</span>
-          </Button>
+          <div>
+      {/* Button to open the sidebar */}
+      <Button variant="outline" size="sm" onClick={() => setIsOpen(true)}>
+        <IconPlus />
+        <span className="hidden lg:inline">More Filters</span>
+      </Button>
+
+      {/* Sidebar */}
+      {isOpen && (
+  <div 
+    className="fixed inset-0 bg-opacity-50 flex justify-end z-50" 
+    onClick={() => setIsOpen(false)} // Close on outside click
+  >
+    <div 
+      className="w-80 h-ful shadow-lg p-6 relative"
+      onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+    >
+      {/* Close Button */}
+      <button
+        className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        onClick={() => setIsOpen(false)}
+      >
+        <X size={24} />
+      </button>
+
+      <h1>Shubam</h1>
+      <UploadSidebar />
+    </div>
+  </div>
+)}
+
+    </div>
         </div>
       </div>
       <TabsContent
