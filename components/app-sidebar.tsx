@@ -1,29 +1,21 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import {
-  IconCamera,
   IconChartBar,
-  IconDashboard,
   IconDatabase,
-  IconFileAi,
-  IconFileDescription,
   IconFileWord,
   IconFolder,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
   IconReport,
   IconSearch,
   IconSettings,
   IconUsers,
 } from "@tabler/icons-react";
+import { LayoutDashboard, Users, UserRound } from "lucide-react"
 
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
-import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -44,17 +36,22 @@ const data = {
     {
       title: "Dashboard",
       url: "/",  
-      icon: IconDashboard,
+      icon: LayoutDashboard,
     },
     {
       title: "Portfolio",
       url: "/portfolio",  
-      icon: IconListDetails,
+      icon: UserRound,
     },
     {
       title: "Notifications",
       url: "/notifications",
       icon: IconChartBar,
+    },
+    {
+      title: "Notices",
+      url: "/notices",
+      icon: IconFolder,
     },
     {
       title: "Auction",
@@ -63,6 +60,21 @@ const data = {
     },
     {
       title: "Data Upload",
+      url: "/data-upload",
+      icon: IconUsers,
+    },
+    {
+      title: "Control Panel",
+      url: "/control-panel",
+      icon: IconUsers,
+    },
+    {
+      title: "User Management",
+      url: "/user-management",
+      icon: Users,
+    },
+    {
+      title: "Permissions",
       url: "/data-upload",
       icon: IconUsers,
     },
@@ -122,13 +134,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-    
-        <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+       
+        <NavMain 
+        // @ts-ignore
+        items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+
+        <span className="text-2xl">powered by resollect</span>
       </SidebarFooter>
     </Sidebar>
   );
